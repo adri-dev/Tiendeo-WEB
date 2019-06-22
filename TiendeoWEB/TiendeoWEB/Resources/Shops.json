@@ -1,0 +1,281 @@
+[
+   {
+      "nombre":"Carrefour Madrid Sur",
+      "direccion":"Avenida de Pablo Neruda, 91-97 ",
+      "ciudad":"Madrid",
+      "latitud":40.3809929,
+      "longitud":-3.663251,
+      "negocio":"Carrefour",
+      "top":1
+   },
+   {
+      "nombre":"Carrefour Aluche",
+      "direccion":"Avda. de los Poblados, 58",
+      "ciudad":"Madrid",
+      "latitud":40.38641,
+      "longitud":-3.764148,
+      "negocio":"Carrefour",
+      "top":2
+   },
+   {
+      "nombre":"Carrefour Los Ángeles",
+      "direccion":"Avda. Andalucía, km. 7,1",
+      "ciudad":"Madrid",
+      "latitud":40.36339,
+      "longitud":-3.69213533,
+      "negocio":"Carrefour",
+      "top":3
+   },
+   {
+      "nombre":"Carrefour Las Glorias",
+      "direccion":"C/Les Glories esq. C/ Llacunna, 155",
+      "ciudad":"Barcelona",
+      "latitud":41.40588,
+      "longitud":2.191681,
+      "negocio":"Carrefour",
+      "top":4
+   },
+   {
+      "nombre":"Carrefour Market Berlín",
+      "direccion":"Calle Berlín, 50-54",
+      "ciudad":"Barcelona",
+      "latitud":41.38361,
+      "longitud":2.14012122,
+      "negocio":"Carrefour",
+      "top":5
+   },
+   {
+      "nombre":"Carrefour La Maquinista",
+      "direccion":"Carrer Potosí, 2",
+      "ciudad":"Barcelona",
+      "latitud":41.44199,
+      "longitud":2.198577,
+      "negocio":"Carrefour",
+      "top":6
+   },
+   {
+      "nombre":"Carrefour Market Mercat del Guinardó",
+      "direccion":"Carrer de Teodor Llorente, 10. Mercat del Guinardó",
+      "ciudad":"Barcelona",
+      "latitud":41.4192734,
+      "longitud":2.178715,
+      "negocio":"Carrefour",
+      "top":7
+   },
+   {
+      "nombre":"Carrefour Market Ramblas",
+      "direccion":"Rambla de los Estudios, 113",
+      "ciudad":"Barcelona",
+      "latitud":41.383976,
+      "longitud":2.17075038,
+      "negocio":"Carrefour",
+      "top":8
+   },
+   {
+      "nombre":"El Corte Inglés",
+      "direccion":"Plaça de Catalunya, 14 ",
+      "ciudad":"Barcelona",
+      "latitud":41.38772,
+      "longitud":2.17113757,
+      "negocio":"El Corte Inglés",
+      "top":9
+   },
+   {
+      "nombre":"La Sirena BCN-ÀLIGA",
+      "direccion":"c/de l'Àliga, 45",
+      "ciudad":"Barcelona",
+      "latitud":41.3749733,
+      "longitud":2.143289,
+      "negocio":"La Sirena",
+      "top":10
+   },
+   {
+      "nombre":"El Corte Inglés ",
+      "direccion":"Av Portal de l'Àngel, 19 ",
+      "ciudad":"Barcelona",
+      "latitud":41.3858566,
+      "longitud":2.17246461,
+      "negocio":"El Corte Inglés",
+      "top":11
+   },
+   {
+      "nombre":"El Corte Inglés",
+      "direccion":"Av. Meridiana, 350-358 ",
+      "ciudad":"Barcelona",
+      "latitud":41.4280663,
+      "longitud":2.18546176,
+      "negocio":"El Corte Inglés",
+      "top":12
+   },
+   {
+      "nombre":"El Corte Inglés",
+      "direccion":"Av Diagonal, 617",
+      "ciudad":"Barcelona",
+      "latitud":41.38745,
+      "longitud":2.1280973,
+      "negocio":"El Corte Inglés",
+      "top":13
+   },
+   {
+      "nombre":"El Corte Inglés",
+      "direccion":"Av Diagonal, 471",
+      "ciudad":"Barcelona",
+      "latitud":41.3925667,
+      "longitud":2.1463418,
+      "negocio":"El Corte Inglés",
+      "top":14
+   },
+   {
+      "nombre":"Caprabo - Barcelona - Josep Tarradelles",
+      "direccion":"Av. de Josep Tarradellas, 114",
+      "ciudad":"Barcelona",
+      "latitud":41.3896141,
+      "longitud":2.14369845,
+      "negocio":"Caprabo",
+      "top":15
+   },
+   {
+      "nombre":"Caprabo - Barcelona - Consell de Cent",
+      "direccion":"Carrer del Consell de Cent, 301",
+      "ciudad":"Barcelona",
+      "latitud":41.3887444,
+      "longitud":2.16238451,
+      "negocio":"Caprabo",
+      "top":16
+   },
+   {
+      "nombre":"Caprabo - Barcelona - L'Illa Diagonal",
+      "direccion":"Avinguda Diagonal, 545",
+      "ciudad":"Barcelona",
+      "latitud":41.38926,
+      "longitud":2.1338,
+      "negocio":"Caprabo",
+      "top":17
+   },
+   {
+      "nombre":"Caprabo - Barcelona - Passeig de Fabra I Puig",
+      "direccion":"Passeig Fabra i Puig, 299",
+      "ciudad":"Barcelona",
+      "latitud":41.43026,
+      "longitud":2.168809,
+      "negocio":"Caprabo",
+      "top":18
+   },
+   {
+      "nombre":"Caprabo - Barcelona - Sicilia",
+      "direccion":"Carrer de Sicília, 220",
+      "ciudad":"Barcelona",
+      "latitud":41.3981972,
+      "longitud":2.17817879,
+      "negocio":"Caprabo",
+      "top":19
+   },
+   {
+      "nombre":"Caprabo - Barcelona - St. Crist",
+      "direccion":"Carrer del Sant Crist, 37",
+      "ciudad":"Barcelona",
+      "latitud":41.37459,
+      "longitud":2.13870859,
+      "negocio":"Caprabo",
+      "top":20
+   },
+   {
+      "nombre":"Mercadona RAMBLA DE POBLENOU",
+      "direccion":"Rambla De Poblenou, 95",
+      "ciudad":"Barcelona",
+      "latitud":41.40237,
+      "longitud":2.199068,
+      "negocio":"Mercadona",
+      "top":21
+   },
+   {
+      "nombre":"Mercadona AVDA. ROMA",
+      "direccion":"Avda. Roma, 22-30",
+      "ciudad":"Barcelona",
+      "latitud":41.3811,
+      "longitud":2.145611,
+      "negocio":"Mercadona",
+      "top":22
+   },
+   {
+      "nombre":"Alcampo Diagonal Mar",
+      "direccion":"Avda. Diagonal Mar, 15. - C.C.Diagonal Mar",
+      "ciudad":"Barcelona",
+      "latitud":41.40923,
+      "longitud":2.21614,
+      "negocio":"Alcampo",
+      "top":23
+   },
+   {
+      "nombre":"Dia Market",
+      "direccion":"Cl. craywinckel 20",
+      "ciudad":"Barcelona",
+      "latitud":41.41176,
+      "longitud":2.13888335,
+      "negocio":"Dia",
+      "top":24
+   },
+   {
+      "nombre":"Dia Market",
+      "direccion":"Cl. laforja, 12-14",
+      "ciudad":"Barcelona",
+      "latitud":41.3999252,
+      "longitud":2.15056968,
+      "negocio":"Dia",
+      "top":25
+   },
+   {
+      "nombre":"La Sirena BCN-ARNAU D'OMS",
+      "direccion":"c/d'Arnau d'Oms, 34-36",
+      "ciudad":"Barcelona",
+      "latitud":41.42985,
+      "longitud":2.17755413,
+      "negocio":"La Sirena",
+      "top":26
+   },
+   {
+      "nombre":"Lidl",
+      "direccion":"C/ Casanova 77-79",
+      "ciudad":"Barcelona",
+      "latitud":41.3859634,
+      "longitud":2.15775323,
+      "negocio":"Lidl",
+      "top":27
+   },
+   {
+      "nombre":"Lidl",
+      "direccion":"C/ Pujades, 15-17",
+      "ciudad":"Barcelona",
+      "latitud":41.39279,
+      "longitud":2.18837929,
+      "negocio":"Lidl",
+      "top":28
+   },
+   {
+      "nombre":"Lidl",
+      "direccion":"Gran Via Corts Catalanes, 721",
+      "ciudad":"Barcelona",
+      "latitud":41.39823,
+      "longitud":2.17951,
+      "negocio":"Lidl",
+      "top":29
+   },
+   {
+      "nombre":"Lidl",
+      "direccion":"C/ Bailén, 165-167",
+      "ciudad":"Barcelona",
+      "latitud":41.4004059,
+      "longitud":2.16568971,
+      "negocio":"Lidl",
+      "top":30
+   },
+   {
+      "nombre":"Lidl",
+      "direccion":"C/ Cartagena, 210",
+      "ciudad":"Barcelona",
+      "latitud":41.40642,
+      "longitud":2.18081,
+      "negocio":"Lidl",
+      "top":31
+   }
+]

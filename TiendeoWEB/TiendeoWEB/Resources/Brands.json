@@ -1,0 +1,47 @@
+[
+   {
+      "nombre":"El Corte Inglés",
+      "top":1,
+      "marker":"https://static0.tiendeo.com/upload_negocio/negocio_43/marker.png"
+   },
+   {
+      "nombre":"Carrefour",
+      "top":2,
+      "marker":"https://static0.tiendeo.com/upload_negocio/negocio_36/marker.png"
+   },
+   {
+      "nombre":"Lidl",
+      "top":3,
+      "marker":"https://static0.tiendeo.com/upload_negocio/negocio_110/marker.png"
+   },
+   {
+      "nombre":"Alcampo",
+      "top":4,
+      "marker":"https://static0.tiendeo.com/upload_negocio/negocio_32/marker.png"
+   },
+   {
+      "nombre":"Mercadona",
+      "top":5,
+      "marker":"https://static0.tiendeo.com/upload_negocio/negocio_31/marker.png"
+   },
+   {
+      "nombre":"Hipercor",
+      "top":6,
+      "marker":"https://static0.tiendeo.com/upload_negocio/negocio_54/marker.png"
+   },
+   {
+      "nombre":"Dia",
+      "top":7,
+      "marker":"https://static0.tiendeo.com/upload_negocio/negocio_1187/marker.png"
+   },
+   {
+      "nombre":"Caprabo",
+      "top":8,
+      "marker":"https://static0.tiendeo.com/upload_negocio/negocio_27/marker.png"
+   },
+   {
+      "nombre":"La Sirena",
+      "top":9,
+      "marker":"https://static0.tiendeo.com/upload_negocio/negocio_44/marker.png"
+   }
+]
