@@ -4,21 +4,30 @@
 
 <html>
 <head>
-    @section CSS{
-        <link rel="stylesheet" href="~/css/Home.css" />
+    @section Styles{
+        <link rel="stylesheet" href="~/css/home.css" />
     }
 </head>
 
 <body>
-    <h3>My Google Maps Demo</h3>
-    @Html.DropDownList("Ciudades", (SelectList)ViewBag.Cities)
-    <div id="map">
+    <h3>Test Web - Tiendeo</h3>
+    <div class="row filters-container">
+        <div class="col-md-3">
+            @Html.Label("Ciudades", "Ciudades")
+            <select id="Ciudades" asp-items="@(SelectList)ViewBag.Ciudades"></select>
+        </div>
+        <div class="col-md-3">
+            @Html.Label("Tiendas Visibles")
+            <select id="TiendasVisibles" asp-items="@new SelectList(new List<object>())"></select>
+        </div>
     </div>
+        <div id="map">
+        </div>
 </body>
 </html>
 
 @section Scripts{
-    <script src="~/js/Home.js" type="text/javascript"></script>
+    <script src="~/js/home.js" type="text/javascript"></script>
     <script src="~/js/maps.js" type="text/javascript"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3xtVT4kQnoEYW-HVhAvjveKBWnmpWCM4&callback=initMap"></script>
 }

@@ -5,37 +5,36 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
+using TiendeoWEB.DAO;
+using TiendeoWEB.DatabaseModels;
 using TiendeoWEB.Models;
 
 namespace TiendeoWEB.Controllers
 {
     public class HomeController : Controller
     {
+        #region Fields
+        private ICiudadDAO _CiudadDAO;
+        private ILocalTiendaNegocioDAO _LocalTiendaNegocioDAO;
+        private IMapper _Mapper;
+        #endregion
+
+        #region Constructors
+        public HomeController(ICiudadDAO ciudadDAO, ILocalTiendaNegocioDAO localTiendaNegocioDAO)
+        {
+            this._Mapper = Mapper.Instance;
+            this._CiudadDAO = ciudadDAO;
+            this._LocalTiendaNegocioDAO = localTiendaNegocioDAO;
+        }
+        #endregion
+
         public IActionResult Index()
         {
-            ViewBag.Cities = new SelectList(this.GetAllCities(), nameof(CityViewModel.nombre), nameof(CityViewModel.nombre));
-            return View();
-        }
-
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
+            this.AddCiudadesInViewBag();
             return View();
         }
 
@@ -45,77 +44,21 @@ namespace TiendeoWEB.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        private List<CityViewModel> GetAllCities()
+        public IActionResult GetCityShops(int? top, int city)
         {
-            Assembly assembly = Assembly.GetEntryAssembly();
-            string json = string.Empty;
-            using (Stream resourceStream = assembly.GetManifestResourceStream("TiendeoWEB.Resources.Cities.json"))
-            using (var reader = new StreamReader(resourceStream))
+            TiendasCiudadViewModel tiendasCiudad = this._Mapper.Map<Ciudad, TiendasCiudadViewModel>(this._CiudadDAO.GetCiudad(city).FirstOrDefault());
+            if (tiendasCiudad != null)
             {
-                json = reader.ReadToEnd();
+                tiendasCiudad.Tiendas = this._Mapper.Map<List<VW_LocalTiendaNegocio>, List<LocalTiendaNegocioViewModel>>(this._LocalTiendaNegocioDAO.GetAllLocalTiendaNeociosOfCiudad(top ?? 0, city).ToList());
+                tiendasCiudad.NumeroTotalTiendas = this._LocalTiendaNegocioDAO.GetNumberOfTiendasInCiudad(city);
             }
-            return JsonConvert.DeserializeObject<List<CityViewModel>>(json).OrderBy(city => city.top).ToList();
+            return Json(tiendasCiudad);
         }
 
-        private CityViewModel GetOneCity(string city)
+        private void AddCiudadesInViewBag()
         {
-            return this.GetAllCities().Where(ct => ct.nombre == city).FirstOrDefault();
-        }
-
-        private List<ShopViewModel> GetAllShops()
-        {
-            Assembly assembly = Assembly.GetEntryAssembly();
-            string json = string.Empty;
-            using (Stream resourceStream = assembly.GetManifestResourceStream("TiendeoWEB.Resources.Shops.json"))
-            using (var reader = new StreamReader(resourceStream))
-            {
-                json = reader.ReadToEnd();
-            }
-            return JsonConvert.DeserializeObject<List<ShopViewModel>>(json).OrderBy(shop => shop.top).ToList();
-        }
-
-        private List<BrandViewModel> GetAllBrands()
-        {
-            Assembly assembly = Assembly.GetEntryAssembly();
-            string json = string.Empty;
-            using (Stream resourceStream = assembly.GetManifestResourceStream("TiendeoWEB.Resources.Brands.json"))
-            using (var reader = new StreamReader(resourceStream))
-            {
-                json = reader.ReadToEnd();
-            }
-            return JsonConvert.DeserializeObject<List<BrandViewModel>>(json).OrderBy(shop => shop.top).ToList();
-        }
-
-        private List<ShopViewModel> GetAllCityShops(string city)
-        {
-            return this.GetAllShops().Where(shop => shop.ciudad == city).ToList();
-        }
-
-        private BrandViewModel GetShopBrand(string shop)
-        {
-            return this.GetAllBrands().Where(brand => brand.nombre == shop).FirstOrDefault();
-        }
-
-        private CityShopsViewModel GetCityShopss(string city)
-        {
-            CityShopsViewModel cityShops = new CityShopsViewModel();
-            cityShops.City = this.GetOneCity(city);
-            cityShops.Shops = this.GetAllCityShops(city);
-            foreach(ShopViewModel shop in cityShops.Shops)
-            {
-                shop.Brand = this.GetShopBrand(shop.negocio);
-            }
-            return cityShops;
-        }
-
-        public IActionResult GetCity(string city)
-        {
-            return Json(this.GetOneCity(city));
-        }
-
-        public IActionResult GetCityShops(string city)
-        {
-            return Json(this.GetCityShopss(city));
+            List<CiudadViewModel> ciudades = this._Mapper.Map<List<Ciudad>, List<CiudadViewModel>>(this._CiudadDAO.GetAllCiudades().ToList());
+            ViewBag.Ciudades = new SelectList(ciudades, nameof(CiudadViewModel.IdCiudad), nameof(CiudadViewModel.Nombre));
         }
     }
 }
