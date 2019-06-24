@@ -1,8 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
-using System.Threading.Tasks;
+using TiendeoApi.ApiModels;
 using TiendeoApi.Models;
 
 namespace TiendeoApi.DAO
@@ -15,6 +14,7 @@ namespace TiendeoApi.DAO
 
         #region Fields
         private masterContext _Context;
+        private IMapper _Mapper;
         #endregion
 
         #region Constructors
@@ -24,13 +24,14 @@ namespace TiendeoApi.DAO
         public ServicioDAO()
         {
             this._Context = new masterContext();
+            this._Mapper = Mapper.Instance;
         }
         #endregion
 
         #region Methods
-        public IQueryable<Servicio> GetAllCiudadServicios(int idCiudad)
+        IQueryable<ServicioApiModel> IServicioDAO.GetAllCiudadServicios(int idCiudad)
         {
-            return this._Context.Servicio.Include(servicio => servicio.IdLocalNavigation).Where(servicio => servicio.IdLocalNavigation.IdCiudad == idCiudad).AsQueryable();
+            return this._Mapper.ProjectTo<ServicioApiModel>(this._Context.Servicio.Include(servicio => servicio.IdLocalNavigation).Where(servicio => servicio.IdLocalNavigation.IdCiudad == idCiudad).AsQueryable());
         }
         #endregion
     }

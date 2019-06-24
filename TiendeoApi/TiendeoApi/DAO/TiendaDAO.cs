@@ -1,8 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TiendeoApi.ApiModels;
 using TiendeoApi.Models;
 using TiendeoApi.Utils;
 
@@ -15,72 +17,29 @@ namespace TiendeoApi.DAO
     {
         #region Fields
         private masterContext _Context;
-        private IDistanceCalculator _DistanceCalculator;
+        private IMapper _Mapper;
         #endregion
 
         #region Constructors
         /// <summary>
         /// Creates a new intance of <see cref="TiendaDAO"/>
         /// </summary>
-        /// <param name="distanceCalculator">Distance Calcultator</param>
-        public TiendaDAO(IDistanceCalculator distanceCalculator)
+        public TiendaDAO()
         {
             this._Context = new masterContext();
-            this._DistanceCalculator = distanceCalculator;
+            this._Mapper = Mapper.Instance;
         }
         #endregion
 
         #region Methods
-        IQueryable<Tienda> ITiendaDAO.GetAllTiendas()
+        IQueryable<TiendaApiModel> ITiendaDAO.GetAllTiendas()
         {
-            return this._Context.Tienda.OrderBy(tienda => tienda.Rate).AsQueryable();
+            return this._Mapper.ProjectTo<TiendaApiModel>(this._Context.Tienda.OrderBy(tienda => tienda.Rate).AsQueryable());
         }
 
-        IQueryable<Tienda> ITiendaDAO.GetClosestTienda(decimal latitude, decimal longitude)
+        IQueryable<TiendaLocalApiModel> ITiendaDAO.GetAllTiendasWithLocal()
         {
-            List<Tienda> tiendas = this._Context.Tienda.Include(tienda => tienda.IdLocalNavigation).ToList();
-            double distance = -1;
-            int closestTienda = 0;
-            foreach(Tienda tienda in tiendas)
-            {
-                double distanceLocal = this._DistanceCalculator.GetDistance(latitude, tienda.IdLocalNavigation.Latitud, longitude, tienda.IdLocalNavigation.Longitud);
-                if (distance == -1 || distance > distanceLocal)
-                {
-                    distance = distanceLocal;
-                    closestTienda = tienda.IdTienda;
-                }
-            }
-            return tiendas.Where(tienda => tienda.IdTienda == closestTienda).AsQueryable();
-        }
-
-        IEnumerable<Tienda> ITiendaDAO.GetClosestTiendas(int top, decimal latitude, decimal longitude)
-        {
-            List<Tienda> tiendas = this._Context.Tienda.Include(tienda => tienda.IdLocalNavigation).ToList();
-            List<Tuple<double, int>> distancias = new List<Tuple<double, int>>();
-            foreach (Tienda tienda in tiendas)
-            {
-                double distanceLocal = this._DistanceCalculator.GetDistance(latitude, tienda.IdLocalNavigation.Latitud, longitude, tienda.IdLocalNavigation.Longitud);
-                if (distancias.Count < top)
-                {
-                    distancias.Add(new Tuple<double, int>(item1: distanceLocal, item2: tienda.IdTienda));
-                }
-                else
-                {
-                    Tuple<double, int> greaterDistanceShop = distancias.Where(gd => distanceLocal < gd.Item1).OrderByDescending(gd => gd.Item1).FirstOrDefault();
-                    if(greaterDistanceShop != null)
-                    {
-                        distancias.Remove(greaterDistanceShop);
-                        distancias.Add(new Tuple<double, int>(item1: distanceLocal, item2: tienda.IdTienda));
-                    }
-                }
-            }
-            distancias = distancias.OrderBy(distancia => distancia.Item1).ToList();
-            List<Tienda> distanceOrderedTiendas = new List<Tienda>();
-            foreach(Tuple<double, int> distancia in distancias)
-            {
-                distanceOrderedTiendas.Add(tiendas.Where(tienda => tienda.IdTienda == distancia.Item2).First());
-            }
-            return tiendas.Where(tienda => distancias.Select(distancia => distancia.Item2).Contains(tienda.IdTienda));
+            return this._Mapper.ProjectTo<TiendaLocalApiModel>(this._Context.Tienda.Include(tienda => tienda.IdLocalNavigation).OrderBy(tienda => tienda.Rate).AsQueryable());
         }
         #endregion
     }

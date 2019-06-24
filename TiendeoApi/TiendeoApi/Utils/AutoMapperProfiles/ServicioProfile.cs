@@ -8,11 +8,14 @@ using TiendeoApi.Models;
 
 namespace TiendeoApi.Utils.AutoMapperProfiles
 {
+    /// <summary>
+    /// Mapper Profile betweeen <see cref="Servicio" and <see cref="ServicioApiModel"/>/>
+    /// </summary>
     public class ServicioProfile:Profile
     {
         #region Constructors
         /// <summary>
-        /// Creates a new instace of <see cref="TiendaProfile"/>
+        /// Creates a new instace of <see cref="ServicioProfile"/>
         /// </summary>
         public ServicioProfile()
         {

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using TiendeoApi.ApiModels;
-using TiendeoApi.DAO;
-using TiendeoApi.Models;
+using TiendeoApi.AppService;
 
 namespace TiendeoApi.Controllers
 {
@@ -15,15 +11,13 @@ namespace TiendeoApi.Controllers
     public class TiendasController : ControllerBase
     {
         #region Fields
-        private IMapper _Mapper;
-        private ITiendaDAO _TiendaDAO;
+        private ITiendaService _TiendaService;
         #endregion
 
         #region Constructors
-        public TiendasController(ITiendaDAO tiendaDAO)
+        public TiendasController(ITiendaService tiendaService)
         {
-            this._Mapper = Mapper.Instance;
-            this._TiendaDAO = tiendaDAO;
+            this._TiendaService = tiendaService;
         }
         #endregion
 
@@ -31,19 +25,19 @@ namespace TiendeoApi.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<TiendaApiModel>> Get()
         {
-            return this._Mapper.Map<List<Tienda>, List<TiendaApiModel>>(this._TiendaDAO.GetAllTiendas().ToList());
+            return this._TiendaService.GetAllTiendas().ToList();
         }
 
         [HttpGet("Closest")]
-        public ActionResult<TiendaApiModel> Get(decimal latitude, decimal longitude)
+        public ActionResult<TiendaLocalApiModel> Get(decimal latitude, decimal longitude)
         {
-            return this._Mapper.Map<Tienda, TiendaApiModel>(this._TiendaDAO.GetClosestTienda(latitude, longitude).FirstOrDefault());
+            return this._TiendaService.GetClosestsTiendas(1, latitude, longitude).FirstOrDefault();
         }
 
         [HttpGet("Closests")]
-        public ActionResult<IEnumerable<TiendaApiModel>> Get(int top, decimal latitude, decimal longitude)
+        public ActionResult<IEnumerable<TiendaLocalApiModel>> Get(int top, decimal latitude, decimal longitude)
         {
-            return this._Mapper.Map<List<Tienda>, List<TiendaApiModel>>(this._TiendaDAO.GetClosestTiendas(top, latitude, longitude).ToList());
+            return this._TiendaService.GetClosestsTiendas(top, latitude, longitude);
         }
         #endregion
     }

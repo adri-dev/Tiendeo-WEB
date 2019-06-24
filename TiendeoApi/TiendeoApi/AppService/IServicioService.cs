@@ -1,12 +1,15 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using TiendeoApi.ApiModels;
 
-namespace TiendeoApi.DAO
+namespace TiendeoApi.AppService
 {
     /// <summary>
-    /// DAO Layer of Service
+    /// Service Layer of Servicio
     /// </summary>
-    public interface IServicioDAO
+    public interface IServicioService
     {
         #region Methods
         /// <summary>

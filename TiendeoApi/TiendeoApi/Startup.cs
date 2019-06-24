@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using TiendeoApi.AppService;
 using TiendeoApi.DAO;
 using TiendeoApi.Models;
 using TiendeoApi.Utils;
@@ -35,6 +36,8 @@ namespace TiendeoApi
             services.AddScoped<ITiendaDAO, TiendaDAO>();
             services.AddScoped<IDistanceCalculator, DistanceCalculator>();
             services.AddScoped<IServicioDAO, ServicioDAO>();
+            services.AddScoped<ITiendaService, TiendaService>();
+            services.AddScoped<IServicioService, ServicioService>();
             Mapper.Initialize(cfg => {
                 cfg.AddProfile<TiendaProfile>();
                 cfg.AddProfile<ServicioProfile>();

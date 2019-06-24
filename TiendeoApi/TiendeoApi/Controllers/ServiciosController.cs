@@ -1,12 +1,8 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using TiendeoApi.ApiModels;
-using TiendeoApi.DAO;
-using TiendeoApi.Models;
+using TiendeoApi.AppService;
 
 namespace TiendeoApi.Controllers
 {
@@ -15,15 +11,13 @@ namespace TiendeoApi.Controllers
     public class ServiciosController:ControllerBase
     {
         #region Fields
-        private IMapper _Mapper;
-        private IServicioDAO _ServicioDAO;
+        private IServicioService _ServicioService;
         #endregion
 
         #region Constructors
-        public ServiciosController(IServicioDAO tiendaDAO)
+        public ServiciosController(IServicioService servicioService)
         {
-            this._Mapper = Mapper.Instance;
-            this._ServicioDAO = tiendaDAO;
+            this._ServicioService = servicioService;
         }
         #endregion
 
@@ -31,7 +25,7 @@ namespace TiendeoApi.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<ServicioApiModel>> Get(int ciudad)
         {
-            return this._Mapper.Map<List<Servicio>, List<ServicioApiModel>>(this._ServicioDAO.GetAllCiudadServicios(ciudad).ToList());
+            return this._ServicioService.GetAllCiudadServicios(ciudad).ToList();
         }
         #endregion
     }

@@ -15,7 +15,6 @@ namespace TiendeoApi.Utils
         private const int RADIANS_CONVERSION = 180;
         #endregion
 
-
         #region Methods
         double IDistanceCalculator.GetDistance(decimal firstLatitude, decimal secondLatitude, decimal firstLongitude, decimal secondLongitude)
         {
