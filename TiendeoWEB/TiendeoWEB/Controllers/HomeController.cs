@@ -1,41 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
-using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Newtonsoft.Json;
-using TiendeoWEB.DAO;
-using TiendeoWEB.DatabaseModels;
 using TiendeoWEB.Models;
+using TiendeoWEB.AppService;
 
 namespace TiendeoWEB.Controllers
 {
     public class HomeController : Controller
     {
         #region Fields
-        private ICiudadDAO _CiudadDAO;
-        private ILocalTiendaNegocioDAO _LocalTiendaNegocioDAO;
-        private IMapper _Mapper;
+        private ICiudadService _CiudadService;
+        private ILocalTiendaNegocioService _LocalTiendaNegocioService;
         #endregion
 
         #region Constructors
-        public HomeController(ICiudadDAO ciudadDAO, ILocalTiendaNegocioDAO localTiendaNegocioDAO)
+        public HomeController(ICiudadService ciudadService, ILocalTiendaNegocioService localTiendaNegocioService)
         {
-            this._Mapper = Mapper.Instance;
-            this._CiudadDAO = ciudadDAO;
-            this._LocalTiendaNegocioDAO = localTiendaNegocioDAO;
+            this._CiudadService = ciudadService;
+            this._LocalTiendaNegocioService = localTiendaNegocioService;
         }
         #endregion
 
+        #region Actions
         public IActionResult Index()
         {
             this.AddCiudadesInViewBag();
             return View();
+        }
+
+        public IActionResult GetCityShops(int? top, int city)
+        {
+            return Json(this._LocalTiendaNegocioService.GetCiudadTiendas(top, city));
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -43,22 +40,14 @@ namespace TiendeoWEB.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        #endregion
 
-        public IActionResult GetCityShops(int? top, int city)
-        {
-            TiendasCiudadViewModel tiendasCiudad = this._Mapper.Map<Ciudad, TiendasCiudadViewModel>(this._CiudadDAO.GetCiudad(city).FirstOrDefault());
-            if (tiendasCiudad != null)
-            {
-                tiendasCiudad.Tiendas = this._Mapper.Map<List<VW_LocalTiendaNegocio>, List<LocalTiendaNegocioViewModel>>(this._LocalTiendaNegocioDAO.GetAllLocalTiendaNeociosOfCiudad(top ?? 0, city).ToList());
-                tiendasCiudad.NumeroTotalTiendas = this._LocalTiendaNegocioDAO.GetNumberOfTiendasInCiudad(city);
-            }
-            return Json(tiendasCiudad);
-        }
-
+        #region Methods
         private void AddCiudadesInViewBag()
         {
-            List<CiudadViewModel> ciudades = this._Mapper.Map<List<Ciudad>, List<CiudadViewModel>>(this._CiudadDAO.GetAllCiudades().ToList());
+            List<CiudadViewModel> ciudades =this._CiudadService.GetAllCiudades().ToList();
             ViewBag.Ciudades = new SelectList(ciudades, nameof(CiudadViewModel.IdCiudad), nameof(CiudadViewModel.Nombre));
         }
+        #endregion
     }
 }
