@@ -1,8 +1,4 @@
-﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using TiendeoWEB.DAO;
 using TiendeoWEB.Models;
 
@@ -15,7 +11,6 @@ namespace TiendeoWEB.AppService
     {
         #region Fields
         private ICiudadDAO _CiudadDAO;
-        private IMapper _Mapper;
         #endregion
 
         #region Constructors
@@ -25,21 +20,20 @@ namespace TiendeoWEB.AppService
         /// <param name="ciudadDAO">ciudad DAO</param>
         public CiudadService(ICiudadDAO ciudadDAO)
         {
-            this._Mapper = Mapper.Instance;
             this._CiudadDAO = ciudadDAO;
         }
         #endregion
 
 
         #region Methods
-        IQueryable<CiudadViewModel> ICiudadService.GetAllCiudades()
+        IQueryable<CiudadDropDownViewModel> ICiudadService.GetAllCiudades()
         {
-            return this._Mapper.ProjectTo<CiudadViewModel>(this._CiudadDAO.GetAllCiudades());
+            return this._CiudadDAO.GetAllCiudades();
         }
 
         IQueryable<CiudadViewModel> ICiudadService.GetCiudad(int idCiudad)
         {
-            return this._Mapper.ProjectTo<CiudadViewModel>(this._CiudadDAO.GetCiudad(idCiudad));
+            return this._CiudadDAO.GetCiudad(idCiudad);
         }
         #endregion
     }

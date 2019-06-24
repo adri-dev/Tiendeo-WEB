@@ -45,8 +45,8 @@ namespace TiendeoWEB.Controllers
         #region Methods
         private void AddCiudadesInViewBag()
         {
-            List<CiudadViewModel> ciudades =this._CiudadService.GetAllCiudades().ToList();
-            ViewBag.Ciudades = new SelectList(ciudades, nameof(CiudadViewModel.IdCiudad), nameof(CiudadViewModel.Nombre));
+            List<CiudadDropDownViewModel> ciudades =this._CiudadService.GetAllCiudades().ToList();
+            ViewBag.Ciudades = new SelectList(ciudades, nameof(CiudadDropDownViewModel.IdCiudad), nameof(CiudadDropDownViewModel.Nombre));
         }
         #endregion
     }

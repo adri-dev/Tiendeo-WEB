@@ -1,9 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
+﻿using AutoMapper;
 using System.Linq;
-using System.Threading.Tasks;
 using TiendeoWEB.DatabaseModels;
+using TiendeoWEB.Models;
 
 namespace TiendeoWEB.DAO
 {
@@ -14,6 +12,7 @@ namespace TiendeoWEB.DAO
     {
         #region Fields
         private masterContext _Context;
+        private IMapper _Mapper;
         #endregion
 
         #region Constructors
@@ -23,18 +22,19 @@ namespace TiendeoWEB.DAO
         public CiudadDAO()
         {
             this._Context = new masterContext();
+            this._Mapper = Mapper.Instance;
         }
         #endregion
 
         #region Methods
-        IQueryable<Ciudad> ICiudadDAO.GetCiudad(int idCiudad)
+        IQueryable<CiudadViewModel> ICiudadDAO.GetCiudad(int idCiudad)
         {
-            return this._Context.Ciudad.Where(ciudad => ciudad.IdCiudad == idCiudad).Include(ciudad => ciudad.Local).AsQueryable();
+            return this._Mapper.ProjectTo<CiudadViewModel>(this._Context.Ciudad.Where(ciudad => ciudad.IdCiudad == idCiudad).AsQueryable());
         }
 
-        IQueryable<Ciudad> ICiudadDAO.GetAllCiudades()
+        IQueryable<CiudadDropDownViewModel> ICiudadDAO.GetAllCiudades()
         {
-            return this._Context.Ciudad.AsQueryable();
+            return this._Mapper.ProjectTo<CiudadDropDownViewModel>(this._Context.Ciudad.OrderBy(Ciudad => Ciudad.Rate).AsQueryable());
         }
         #endregion
     }

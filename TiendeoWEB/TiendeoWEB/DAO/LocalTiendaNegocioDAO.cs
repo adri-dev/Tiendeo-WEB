@@ -1,8 +1,10 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TiendeoWEB.DatabaseModels;
+using TiendeoWEB.Models;
 
 namespace TiendeoWEB.DAO
 {
@@ -13,6 +15,7 @@ namespace TiendeoWEB.DAO
     {
         #region Fields
         private masterContext _Context;
+        private IMapper _Mapper;
         #endregion
 
         #region Constructors
@@ -22,6 +25,7 @@ namespace TiendeoWEB.DAO
         public LocalTiendaNegocioDAO()
         {
             this._Context = new masterContext();
+            this._Mapper = Mapper.Instance;
         }
         #endregion
 
@@ -32,14 +36,14 @@ namespace TiendeoWEB.DAO
             return this._Context.VW_LocalTiendaNegocio.Where(ltn => ltn.IdCiudad == idCiudad).Count();
         }
 
-        IQueryable<VW_LocalTiendaNegocio> ILocalTiendaNegocioDAO.GetAllLocalTiendaNeociosOfCiudad(int top, int idCiudad)
+        IQueryable<LocalTiendaNegocioViewModel> ILocalTiendaNegocioDAO.GetAllLocalTiendaNeociosOfCiudad(int top, int idCiudad)
         {
             IQueryable<VW_LocalTiendaNegocio> localesNegocios = this._Context.VW_LocalTiendaNegocio.Where(ltn => ltn.IdCiudad == idCiudad).OrderBy(ltn => ltn.TiendaRate);
             if (top > 0)
             {
                 localesNegocios = localesNegocios.Take(top);
             }
-            return localesNegocios;
+            return this._Mapper.ProjectTo<LocalTiendaNegocioViewModel>(localesNegocios);
         }
         #endregion
     }

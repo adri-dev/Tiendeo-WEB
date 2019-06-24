@@ -22,7 +22,7 @@ namespace TiendeoWEB.AppService
         /// Gets All Ciudades
         /// </summary>
         /// <returns>Returns All Ciudades</returns>
-        IQueryable<CiudadViewModel> GetAllCiudades();
+        IQueryable<CiudadDropDownViewModel> GetAllCiudades();
         #endregion
     }
 }

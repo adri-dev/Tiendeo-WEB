@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using TiendeoWEB.DatabaseModels;
+﻿using System.Linq;
+using TiendeoWEB.Models;
 
 namespace TiendeoWEB.DAO
 {
@@ -24,7 +21,7 @@ namespace TiendeoWEB.DAO
         /// <param name="top">top number</param>
         /// <param name="idCiudad">id Ciudad</param>
         /// <returns>Returns the top Tiendas in a Ciudad</returns>
-        IQueryable<VW_LocalTiendaNegocio> GetAllLocalTiendaNeociosOfCiudad(int top, int idCiudad);
+        IQueryable<LocalTiendaNegocioViewModel> GetAllLocalTiendaNeociosOfCiudad(int top, int idCiudad);
         #endregion
     }
 }

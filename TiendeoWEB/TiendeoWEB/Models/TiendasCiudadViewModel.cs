@@ -16,15 +16,13 @@ namespace TiendeoWEB.Models
         /// </summary>
         public TiendasCiudadViewModel()
         {
+            this.Ciudad = new CiudadViewModel();
             this.Tiendas = new List<LocalTiendaNegocioViewModel>();
         }
         #endregion
 
         #region Properties
-        public int IdCiudad { get; set; }
-        public string Nombre { get; set; }
-        public decimal Latitud { get; set; }
-        public decimal Longitud { get; set; }
+        public CiudadViewModel Ciudad { get; set; }
         public List<LocalTiendaNegocioViewModel> Tiendas { get; set; }
         public int NumeroTotalTiendas { get; set; }
         #endregion
